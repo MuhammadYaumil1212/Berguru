@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
+            Image.asset("assets/Logo/berguru_logo.png"),
           ],
         ),
       ),
