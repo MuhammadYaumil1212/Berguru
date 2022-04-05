@@ -1,3 +1,4 @@
+import 'package:berguru_app/view/login_page.dart';
 import 'package:berguru_app/view/splash_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class StartPage extends StatelessWidget{
                       recognizer: new TapGestureRecognizer()..onTap = () {
                         Navigator.push(context,
                           MaterialPageRoute(builder: (context){
-                            return SplashScreen();
+                            return LoginPage();
                           }),
                         );
                       },
@@ -74,6 +75,10 @@ class StartPage extends StatelessWidget{
                 height: 100.0,
                 child: ElevatedButton(
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage())
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
