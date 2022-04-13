@@ -28,7 +28,7 @@ class StartPage extends StatelessWidget{
                       ),
                       text: "Skip",
                       recognizer: new TapGestureRecognizer()..onTap = () {
-                        Navigator.push(context,
+                        Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context){
                             return SignInPage();
                           }),
@@ -76,7 +76,7 @@ class StartPage extends StatelessWidget{
                 height: 100.0,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => SignUpPage())
                     );

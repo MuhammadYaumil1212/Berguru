@@ -81,7 +81,8 @@ class _signInPageState extends State<SignInPage>{
                               SizedBox(height: 15),
                               ElevatedButton(
                                 onPressed: (){
-
+                                  Navigator.pushReplacement(context, MaterialPageRoute(
+                                      builder: (context) => Dashboard()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
@@ -114,7 +115,7 @@ class _signInPageState extends State<SignInPage>{
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          Navigator.push(context,
+                                          Navigator.pushReplacement(context,
                                             MaterialPageRoute(builder: (context){
                                               return SignUpPage();
                                             }),

@@ -26,17 +26,31 @@ class _dashboardPageState extends State<Dashboard>{
               children: [
                 SafeArea(
                   child: Row(
-                    children: [
+                    children: <Widget>[
                       Column(
                         children: <Widget>[
-                          RichText(
-                            text: TextSpan(
-                              text: "Good Afternoon!",
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Text(
+                              "Good Afternoon!",
                               style: TextStyle(
-
+                                color: Colors.white,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 20,
                               ),
                             ),
-                          )
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                              "Name",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18
+                            ),
+                          ),
+                          ActionChip(label: Text("Logout"), onPressed: (){
+                          }),
                         ],
                       ),
                     ],

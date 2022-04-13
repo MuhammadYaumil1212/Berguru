@@ -10,6 +10,13 @@ class SignUpPage extends StatefulWidget{
   State<SignUpPage> createState() => _SignUpPageState();
 }
 class _SignUpPageState extends State<SignUpPage>{
+  //Form Key
+  final _formKey = GlobalKey<FormState>();
+  //Form Controller
+  final TextEditingController nameController = new TextEditingController();
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController confirmPasswordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,74 +74,68 @@ class _SignUpPageState extends State<SignUpPage>{
                       Container(
                         width: 300,
                         margin: const EdgeInsets.only(top: 20),
-                        child: Column(
-                          children: <Widget>[
-                            buildTextfield("Nama",false,false),
-                            buildTextfield("Email",false,true),
-                            buildTextfield("Password",true,false),
-                            buildTextfield("Confirm Password",true,false),
-                            SizedBox(height: 30),
-                            ElevatedButton(
-                                onPressed: (){
-                                  Navigator.push(context,
-                                    MaterialPageRoute(builder: (context)=>
-                                        Dashboard()),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 50,
-                                        vertical: 12
-                                    ),
-                                    primary: Color(0xff678BE3),
-                                ),
-                                child: Text("Sign Up"),
-                            ),
-                            SizedBox(height: 10),
-                           Row(
-                             mainAxisAlignment: MainAxisAlignment.center,
-                             children: [
-                               Column(
-                                 children: [
-                                   Text(
-                                     "already have account ?",
-                                     style: TextStyle(
-                                         color: Color(0xfff666666)
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: <Widget>[
+                              buildTextfield("Nama",false,false,false),
+                              buildTextfield("Email",false,false,true),
+                              buildTextfield("Password",true,false,false),
+                              buildTextfield("Confirm Password",false,true,false),
+                              SizedBox(height: 15),
+                              ElevatedButton(
+                                  onPressed: (){},
+                                  style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 50,
+                                          vertical: 12
+                                      ),
+                                      primary: Color(0xff678BE3),
+                                  ),
+                                  child: Text("Sign Up"),
+                              ),
+                              SizedBox(height: 10),
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Column(
+                                   children: const [
+                                    Text(
+                                       "already have account ?",
+                                       style: TextStyle(
+                                           color: Color(0xfff666666)
+                                       ),
                                      ),
-                                   ),
-                                 ],
-                               ),
-                               SizedBox(width: 5),
-                               Column(
-                                 children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: "SignIn",
-                                          style: TextStyle(
-                                              color: Color(0xfff666666)
-                                          ),
-                                          recognizer: new TapGestureRecognizer()
-                                            ..onTap = () {
-                                            Navigator.push(context,
-                                              MaterialPageRoute(builder: (context){
-                                                return SignInPage();
-                                              }),
-                                            );
-                                          },
-                                        ),
-                                      ]
-                                    ),
-                                  )
-                                 ],
-                               ),
-                             ],
-                           )
-                          ],
+                                   ],
+                                 ),
+                                 SizedBox(width: 5),
+                                 Column(
+                                   children: [
+                                     GestureDetector(
+                                       onTap: (){
+                                         Navigator.pushReplacement(context,
+                                           MaterialPageRoute(builder: (context){
+                                             return SignInPage();
+                                           }),
+                                         );
+                                       },
+                                       child: const Text(
+                                           "SignIn",
+                                         style: TextStyle(
+                                           fontWeight: FontWeight.bold,
+                                           color: Color(0xff678BE3),
+                                         ),
+                                       ),
+                                     )
+                                   ],
+                                 ),
+                               ],
+                             )
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -180,11 +181,21 @@ class _SignUpPageState extends State<SignUpPage>{
       ),
     );
   }
-  Widget buildTextfield(String hintText,bool isPassword, bool isEmail){
+  Widget buildTextfield(String hintText,bool isPassword,bool isConfirmPassword,
+      bool isEmail){
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        obscureText: isPassword,
+      child: TextFormField(
+        autofocus: false,
+        controller: (isEmail) ? emailController : (isPassword) ? passwordController
+        : nameController,
+        // validator: (),
+        onSaved: (value){
+          (isEmail) ? emailController.text = value! : (isPassword)
+              ? passwordController.text = value! : (isConfirmPassword)
+              ? confirmPasswordController.text = value! : nameController.text = value!;
+        },
+        obscureText: isPassword || isConfirmPassword,
         keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
         decoration: InputDecoration(
           hintText: hintText,

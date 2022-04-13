@@ -26,7 +26,7 @@ class OnBoardingPage extends StatelessWidget{
                         ),
                         text: "Skip",
                         recognizer: new TapGestureRecognizer()..onTap = () {
-                          Navigator.push(context,
+                          Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context){
                               return StartPage();
                             }),
