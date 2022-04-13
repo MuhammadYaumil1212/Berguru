@@ -1,5 +1,7 @@
 import 'package:berguru_app/view/dashboard_page.dart';
+import 'package:berguru_app/view/signin_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -91,6 +93,47 @@ class _SignUpPageState extends State<SignUpPage>{
                                 ),
                                 child: Text("Sign Up"),
                             ),
+                            SizedBox(height: 10),
+                           Row(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             children: [
+                               Column(
+                                 children: [
+                                   Text(
+                                     "already have account ?",
+                                     style: TextStyle(
+                                         color: Color(0xfff666666)
+                                     ),
+                                   ),
+                                 ],
+                               ),
+                               SizedBox(width: 5),
+                               Column(
+                                 children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: "SignIn",
+                                          style: TextStyle(
+                                              color: Color(0xfff666666)
+                                          ),
+                                          recognizer: new TapGestureRecognizer()
+                                            ..onTap = () {
+                                            Navigator.push(context,
+                                              MaterialPageRoute(builder: (context){
+                                                return SignInPage();
+                                              }),
+                                            );
+                                          },
+                                        ),
+                                      ]
+                                    ),
+                                  )
+                                 ],
+                               ),
+                             ],
+                           )
                           ],
                         ),
                       ),

@@ -1,3 +1,4 @@
+import 'package:berguru_app/view/signin_page.dart';
 import 'package:berguru_app/view/signup_page.dart';
 import 'package:berguru_app/view/splash_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -29,7 +30,7 @@ class StartPage extends StatelessWidget{
                       recognizer: new TapGestureRecognizer()..onTap = () {
                         Navigator.push(context,
                           MaterialPageRoute(builder: (context){
-                            return SignUpPage();
+                            return SignInPage();
                           }),
                         );
                       },
