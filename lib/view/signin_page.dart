@@ -1,5 +1,6 @@
 import 'package:berguru_app/view/dashboard_page.dart';
 import 'package:berguru_app/view/signup_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,11 @@ class SignInPage extends StatefulWidget{
 }
 
 class _signInPageState extends State<SignInPage>{
+  //Form Key
+  final _formKey = GlobalKey<FormState>();
+  //Editing Controller
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,72 +72,68 @@ class _signInPageState extends State<SignInPage>{
                       Container(
                         width: 300,
                         margin: const EdgeInsets.only(top: 50),
-                        child: Column(
-                          children: <Widget>[
-                            buildTextfield("Email",false,true),
-                            buildTextfield("Password",true,false),
-                            SizedBox(height: 20),
-                            ElevatedButton(
-                              onPressed: (){
-                                Navigator.push(context,
-                                  MaterialPageRoute(builder: (context)=>
-                                      Dashboard()),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: <Widget>[
+                              buildTextfield("Email",false,true),
+                              buildTextfield("Password",true,false),
+                              SizedBox(height: 15),
+                              ElevatedButton(
+                                onPressed: (){
+
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 50,
+                                      vertical: 12
+                                  ),
+                                  primary: Color(0xff678BE3),
                                 ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 50,
-                                    vertical: 12
-                                ),
-                                primary: Color(0xff678BE3),
+                                child: Text("Sign In"),
                               ),
-                              child: Text("Sign In"),
-                            ),
-                            SizedBox(height: 20),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      "already have account ?",
-                                      style: TextStyle(
-                                          color: Color(0xfff666666)
+                              SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "already have account ?",
+                                        style: TextStyle(
+                                            color: Color(0xfff666666)
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(width: 5),
-                                Column(
-                                  children: [
-                                    RichText(
-                                      text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: "SignUp",
-                                              style: TextStyle(
-                                                  color: Color(0xfff666666)
-                                              ),
-                                              recognizer: new TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context){
-                                                      return SignUpPage();
-                                                    }),
-                                                  );
-                                                },
-                                            ),
-                                          ]
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
+                                    ],
+                                  ),
+                                  SizedBox(width: 5),
+                                  Column(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                            MaterialPageRoute(builder: (context){
+                                              return SignUpPage();
+                                            }),
+                                          );
+                                        },
+                                        child: Text(
+                                            "SignUp",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff678BE3),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -173,9 +175,17 @@ class _signInPageState extends State<SignInPage>{
   Widget buildTextfield(String hintText,bool isPassword, bool isEmail){
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextField(
+      child: TextFormField(
+        autofocus: false,
+        controller: isEmail ? emailController : passwordController,
         obscureText: isPassword,
         keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
+        // validator: () {},
+        onSaved: (value){
+          isEmail ? emailController.text = value! :
+          passwordController.text = value!;
+        },
+        textInputAction: isEmail ? TextInputAction.next : TextInputAction.done,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(fontSize: 14,color: Colors.grey),
