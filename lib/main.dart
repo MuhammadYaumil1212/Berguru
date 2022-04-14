@@ -1,4 +1,4 @@
-import 'package:berguru_app/view/splash_screen.dart';
+import 'package:berguru_app/Views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

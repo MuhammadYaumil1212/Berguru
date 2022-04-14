@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:berguru_app/view/on_boarding_page.dart';
-import 'package:berguru_app/view/start_page.dart';
+import 'package:berguru_app/Views/on_boarding_page.dart';
+import 'package:berguru_app/Views/start_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

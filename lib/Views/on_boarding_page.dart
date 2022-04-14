@@ -1,4 +1,4 @@
-import 'package:berguru_app/view/start_page.dart';
+import 'package:berguru_app/Views/start_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,6 @@
-import 'package:berguru_app/view/signin_page.dart';
-import 'package:berguru_app/view/signup_page.dart';
-import 'package:berguru_app/view/splash_screen.dart';
+import 'package:berguru_app/Views/signin_page.dart';
+import 'package:berguru_app/Views/signup_page.dart';
+import 'package:berguru_app/Views/splash_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

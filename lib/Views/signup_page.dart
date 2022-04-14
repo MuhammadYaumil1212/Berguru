@@ -1,5 +1,5 @@
-import 'package:berguru_app/view/dashboard_page.dart';
-import 'package:berguru_app/view/signin_page.dart';
+import 'package:berguru_app/Views/dashboard_page.dart';
+import 'package:berguru_app/Views/signin_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
