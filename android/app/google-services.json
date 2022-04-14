@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "304005945864",
+    "project_id": "berguruproject",
+    "storage_bucket": "berguruproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304005945864:android:a8406835f68ad82f7ccfbd",
+        "android_client_info": {
+          "package_name": "com.example.berguru_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304005945864-kalg0krbefn7vvb9jqhbeed69r6pm016.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.berguru_app",
+            "certificate_hash": "323e2ee5a6e2bfc26f7921c6369651cd8eb766ab"
+          }
+        },
+        {
+          "client_id": "304005945864-p7ncbrv7tc3se51roe22ie00f72j3ab6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKCm8iwyzINwDsZ2YHH-46fOBjN3OqhHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304005945864-p7ncbrv7tc3se51roe22ie00f72j3ab6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

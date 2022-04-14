@@ -1,8 +1,10 @@
 import 'package:berguru_app/view/dashboard_page.dart';
 import 'package:berguru_app/view/signup_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInPage extends StatefulWidget{
   @override
@@ -15,6 +17,8 @@ class _signInPageState extends State<SignInPage>{
   //Editing Controller
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
+  //firebase
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,8 +85,8 @@ class _signInPageState extends State<SignInPage>{
                               SizedBox(height: 15),
                               ElevatedButton(
                                 onPressed: (){
-                                  Navigator.pushReplacement(context, MaterialPageRoute(
-                                      builder: (context) => Dashboard()));
+                                  signIn(emailController.text,
+                                      passwordController.text);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
@@ -181,7 +185,26 @@ class _signInPageState extends State<SignInPage>{
         controller: isEmail ? emailController : passwordController,
         obscureText: isPassword,
         keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
-        // validator: () {},
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{6,}$');
+          if(value!.isEmpty){
+            if(isEmail){
+            //  Reg Expression for email validation
+              if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
+                return ("Please Enter a valid email");
+              }
+              return ("Please Enter Email");
+            }
+            if(isPassword){
+              return("password is required for login");
+            }
+          }
+          if(isPassword){
+            if(!regex.hasMatch(value)){
+              return "Please enter valid password (min: 6 character)";
+            }
+          }
+        },
         onSaved: (value){
           isEmail ? emailController.text = value! :
           passwordController.text = value!;
@@ -203,4 +226,22 @@ class _signInPageState extends State<SignInPage>{
       ),
     );
   }
+//  Login function
+    void signIn(String email, String password)async{
+      if(_formKey.currentState!.validate()){
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+        .then((uid) => {
+          Fluttertoast.showToast(msg: "Login Successfull! "),
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+                builder: (context) => Dashboard()
+            ),
+          ),
+        }).catchError((e){
+          Fluttertoast.showToast(msg: e!.message);
+        });
+
+      }
+    }
 }

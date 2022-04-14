@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>304005945864-80hjonhf6u5arip3qqsnear91sdla48n.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.304005945864-80hjonhf6u5arip3qqsnear91sdla48n</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>304005945864-kalg0krbefn7vvb9jqhbeed69r6pm016.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAC0wUCAtEtvW3RGSX8IH2TXlCB93KoLQY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>304005945864</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.berguruApp</string>
+	<key>PROJECT_ID</key>
+	<string>berguruproject</string>
+	<key>STORAGE_BUCKET</key>
+	<string>berguruproject.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:304005945864:ios:c4284cc02a8800ce7ccfbd</string>
+</dict>
+</plist>
