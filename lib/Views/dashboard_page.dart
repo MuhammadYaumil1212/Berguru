@@ -3,6 +3,7 @@ import 'package:berguru_app/Views/signin_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Dashboard extends StatefulWidget{
   @override
@@ -69,17 +70,23 @@ class _dashboardPageState extends State<Dashboard>{
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 23,
+                              fontSize: 20,
                           ),
                         ),
                       ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30
+                    ),
                     child: Column(
                       children: <Widget>[
-
+                        FaIcon(
+                          FontAwesomeIcons.bell,
+                          color: Colors.white,
+                          size: 25,
+                        )
                       ],
                     ),
                   )

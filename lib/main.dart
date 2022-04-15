@@ -1,11 +1,13 @@
 import 'package:berguru_app/Views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:native_notify/native_notify.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  NativeNotify.initialize(527, 'xoErqzH0iXbo5v5hdC4Ozl', null);
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(const MyApp());
 }
 

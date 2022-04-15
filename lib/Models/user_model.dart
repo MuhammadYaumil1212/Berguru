@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class UserModel {
   String ? uid;
   String ? nama;
@@ -27,6 +29,6 @@ class UserModel {
 
   String? getNickName(){
     var getNama = this.nama;
-    return getNama?[0];
+    return getNama;
   }
 }

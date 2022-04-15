@@ -39,6 +39,8 @@ dependencies:
   fluttertoast: ^8.0.9
   font_awesome_flutter: ^10.1.0
   intl: ^0.17.0
+  badges: ^2.0.2
+  native_notify: ^0.0.12
 
 dev_dependencies:
   flutter_test:
