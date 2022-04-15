@@ -1,3 +1,7 @@
+import 'package:berguru_app/Models/user_model.dart';
+import 'package:berguru_app/Views/signin_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget{
@@ -5,6 +9,17 @@ class Dashboard extends StatefulWidget{
   State<Dashboard> createState() => _dashboardPageState();
 }
 class _dashboardPageState extends State<Dashboard>{
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance.collection("users").doc(user!.uid).get()
+        .then((value){
+          this.loggedInUser = UserModel.fromMap(value.data());
+          setState((){});
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,45 +37,64 @@ class _dashboardPageState extends State<Dashboard>{
             ),
           ),
           SingleChildScrollView(
-            child: Column(
-              children: [
-                SafeArea(
-                  child: Row(
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Text(
-                              "Good Afternoon!",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 20,
-                              ),
-                            ),
+            child: SafeArea(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 15
+                        ),
+                        child: Text(
+                          "Good Afternoon,",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 23,
                           ),
-                          SizedBox(height: 10),
-                          Text(
-                              "Name",
-                            style: TextStyle(
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 0.1
+                        ),
+                        child: Text(
+                          "${loggedInUser.getNickName()}!",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18
-                            ),
+                              fontSize: 23,
                           ),
-                          ActionChip(label: Text("Logout"), onPressed: (){
-                          }),
-                        ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      children: <Widget>[
+
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],
       ),
+    );
+  }
+  Future<void>logout(BuildContext context) async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context)=> SignInPage())
     );
   }
 

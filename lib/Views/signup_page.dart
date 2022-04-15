@@ -1,8 +1,12 @@
+import 'package:berguru_app/Models/user_model.dart';
 import 'package:berguru_app/Views/dashboard_page.dart';
 import 'package:berguru_app/Views/signin_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignUpPage extends StatefulWidget{
@@ -10,6 +14,7 @@ class SignUpPage extends StatefulWidget{
   State<SignUpPage> createState() => _SignUpPageState();
 }
 class _SignUpPageState extends State<SignUpPage>{
+  final _auth = FirebaseAuth.instance;
   //Form Key
   final _formKey = GlobalKey<FormState>();
   //Form Controller
@@ -39,7 +44,7 @@ class _SignUpPageState extends State<SignUpPage>{
                 Image.asset("assets/Logo/berguru_logo_2.png"),
                 SizedBox(height: 15),
                 Container(
-                  height: 450,
+                  height: 500,
                   width: MediaQuery.of(context).size.width-40,
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
@@ -72,8 +77,8 @@ class _SignUpPageState extends State<SignUpPage>{
                         ],
                       ),
                       Container(
+                        padding: const EdgeInsets.symmetric(vertical:15),
                         width: 300,
-                        margin: const EdgeInsets.only(top: 20),
                         child: Form(
                           key: _formKey,
                           child: Column(
@@ -84,7 +89,10 @@ class _SignUpPageState extends State<SignUpPage>{
                               buildTextfield("Confirm Password",false,true,false),
                               SizedBox(height: 15),
                               ElevatedButton(
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    signUp(nameController.text, emailController.text,
+                                        passwordController.text);
+                                  },
                                   style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12.0),
@@ -99,7 +107,7 @@ class _SignUpPageState extends State<SignUpPage>{
                               ),
                               SizedBox(height: 10),
                              Row(
-                               mainAxisAlignment: MainAxisAlignment.center,
+                               mainAxisAlignment:  MainAxisAlignment.center,
                                children: [
                                  Column(
                                    children: const [
@@ -187,9 +195,39 @@ class _SignUpPageState extends State<SignUpPage>{
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         autofocus: false,
-        controller: (isEmail) ? emailController : (isPassword) ? passwordController
+        controller: (isEmail) ? emailController :
+        (isPassword) ? passwordController : (isConfirmPassword) ? confirmPasswordController
         : nameController,
-        // validator: (),
+        validator: (value){
+          RegExp regex = new RegExp(r'^.{6,}$');
+          if(value!.isEmpty){
+            if(isEmail){
+              if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
+                return ("Please Enter a valid email");
+              }
+              return ("Please enter email");
+            }
+            if(isPassword){
+              return("password is required for login");
+            }
+            if(isConfirmPassword){
+              if(confirmPasswordController.text.length > 6
+                  && passwordController.text != value){
+                return "Password not match";
+              }
+              return null;
+            }
+            return("Please enter your name");
+          }
+          if(!regex.hasMatch(value)){
+            return ("Please enter name min 6 characters");
+          }
+          if(isPassword){
+            if(!regex.hasMatch(value)){
+              return "Please enter valid password (min: 6 characters)";
+            }
+          }
+        },
         onSaved: (value){
           (isEmail) ? emailController.text = value! : (isPassword)
               ? passwordController.text = value! : (isConfirmPassword)
@@ -211,6 +249,38 @@ class _SignUpPageState extends State<SignUpPage>{
           ),
         ),
       ),
+    );
+  }
+  void signUp(String nama, String email, String password) async{
+    if(_formKey.currentState!.validate()){
+      await _auth.createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => {
+            postDetailToFireStore()
+      }).catchError((e){
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
+  }
+
+  postDetailToFireStore() async{
+  //  Calling our firestore
+  //  calling our user model
+  //  sending the values
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+    UserModel userModel = UserModel();
+  //  writing all the values
+    userModel.uid = user!.uid;
+    userModel.nama = nameController.text;
+    userModel.email = user.email;
+
+    await firebaseFirestore.collection("users")
+    .doc(user.uid)
+    .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account Created Successfully!");
+    Navigator.pushAndRemoveUntil((context),
+        MaterialPageRoute(builder: (context) => Dashboard()),
+        (route) => false
     );
   }
 }
