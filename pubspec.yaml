@@ -42,6 +42,7 @@ dependencies:
   badges: ^2.0.2
   native_notify: ^0.0.12
   gap: ^2.0.0
+  flutter_expanded_tile: ^0.3.6
 
 dev_dependencies:
   flutter_test:
