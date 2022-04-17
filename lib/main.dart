@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        backgroundColor: Color(0xfffF6F9FF)
+      ),
       title: 'Berguru',
       home: SplashScreen(),
     );
