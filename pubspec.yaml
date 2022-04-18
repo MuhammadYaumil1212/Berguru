@@ -43,6 +43,7 @@ dependencies:
   native_notify: ^0.0.12
   gap: ^2.0.0
   flutter_expanded_tile: ^0.3.6
+  expandable: ^5.0.1
 
 dev_dependencies:
   flutter_test:

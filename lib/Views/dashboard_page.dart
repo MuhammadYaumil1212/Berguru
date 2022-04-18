@@ -49,7 +49,7 @@ class _dashboardPageState extends State<Dashboard>{
           ),
           BottomNavigationBarItem(
               icon: FaIcon(FontAwesomeIcons.userGroup),
-              label: 'friends',
+              label: 'profile',
               backgroundColor: Colors.blueAccent
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:berguru_app/Models/user_model.dart';
+import 'package:berguru_app/Views/match_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -71,10 +72,11 @@ class _HomePage extends State<HomePage>{
                             child: Text(
                               "${loggedInUser.getNickName()}!",
                               textAlign: TextAlign.left,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   height: 0
                               ),
                             ),
@@ -182,29 +184,40 @@ class _HomePage extends State<HomePage>{
                                           color: Colors.white
                                       ),
                                     ),
-                                    SizedBox(height: 40),
-                                    RichText(
-                                      text: TextSpan(
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                    Gap(40),
+                                    InkWell(
+                                      child: RichText(
+                                        text: TextSpan(
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text: 'Book Now',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16
+                                              ),
+                                            ),
+                                            WidgetSpan(
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        children: [
-                                          TextSpan(
-                                            text: 'Book Now',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16
-                                            ),
-                                          ),
-                                          WidgetSpan(
-                                            child: Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                                            ),
-                                          ),
-                                        ],
                                       ),
+                                      onTap: (){
+                                        setState(() {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => MatchPage(),
+                                            ),
+                                          );
+                                        });
+                                      },
                                     )
                                   ],
                                 ),
