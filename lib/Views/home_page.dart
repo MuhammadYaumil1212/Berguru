@@ -76,7 +76,7 @@ class _HomePage extends State<HomePage>{
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                  fontSize: 15,
                                   height: 0
                               ),
                             ),
@@ -189,7 +189,7 @@ class _HomePage extends State<HomePage>{
                                       child: RichText(
                                         text: TextSpan(
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
                                           ),
@@ -198,7 +198,7 @@ class _HomePage extends State<HomePage>{
                                               text: 'Book Now',
                                               style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 16
+                                                  fontSize: 14
                                               ),
                                             ),
                                             WidgetSpan(

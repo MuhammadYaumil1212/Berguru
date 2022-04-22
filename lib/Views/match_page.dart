@@ -93,8 +93,36 @@ class _MatchPage extends State<MatchPage>{
               ),
             ],
           ),
-          Card(
-
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              color: Color(0xfffE2EBFF),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Column(
+                              children: [
+                                Image.network("https://dummyimage.com/72x70/000/fff"),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
