@@ -44,6 +44,7 @@ dependencies:
   gap: ^2.0.0
   flutter_expanded_tile: ^0.3.6
   expandable: ^5.0.1
+  bulleted_list: ^0.0.1+0.1a
 
 dev_dependencies:
   flutter_test:
