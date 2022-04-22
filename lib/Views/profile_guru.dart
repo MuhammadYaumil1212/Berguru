@@ -35,7 +35,7 @@ class _ProfileGuru extends State<ProfileGuru>{
           Padding(
             padding: const EdgeInsets.all(30),
             child: Container(
-              height: MediaQuery.of(context).size.height * 1/3,
+              height: MediaQuery.of(context).size.height * 1/1.4,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -144,14 +144,52 @@ class _ProfileGuru extends State<ProfileGuru>{
                                 fontWeight: FontWeight.bold
                               ),
                             ),
-                            RichText(
-                              text: TextSpan(
-                                
-                              ),
+                          ],
+                        ),
+                      ),
+                      Gap(10),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text("Guru IPA dengan spesialisasi di biologi, "
+                                  "lulus dengan predikat sempurna, "
+                                  "dan berpengalaman mengajar murid SMP hingga SMA. "
+                                  "Terbuka untuk semua jenis jasa dan kebutuhan."),
                             )
                           ],
                         ),
-                      )
+                      ),
+                      Gap(10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Experience",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Gap(10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(""),
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
